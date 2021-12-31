@@ -34,10 +34,24 @@ function isEmpty() {
     else {
         document.getElementById("tasks").textContent = "Current Tasks: None";
     }
-  }
+}
 
 //clears all tasks
-  function clearitemlist() {
+function clearitemlist() {
     document.getElementById("mylist").innerHTML = "";
     isEmpty();
-  }
+}
+
+//remove task
+function removetask() {
+    if (document.getElementById("cnclbtn") == null) {
+        var cancelbutton = document.createElement("button");
+    cancelbutton.innerHTML = "cancel";
+    cancelbutton.id = "cnclbtn";
+    cancelbutton.onclick = function(event) {
+        var btn = document.getElementById("cnclbtn");
+        btn.remove();
+    }
+    document.body.appendChild(cancelbutton);
+    }
+}
