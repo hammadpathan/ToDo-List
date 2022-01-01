@@ -14,7 +14,7 @@ enterkey.addEventListener("click", function() {
 
 //adds item to list using value in the input box
 function changelistitem() {
-    var node = document.createElement("LI");
+    var node = document.createElement("li");
     var addition = document.getElementById("listadd").value;
     var textnode = document.createTextNode(addition);
     node.appendChild(textnode);
@@ -29,7 +29,7 @@ function changelistitem() {
 function isEmpty() {
     if ((document.getElementById("mylist").innerHTML.trim() == "") == false) {
         //number of tasks
-        document.getElementById("tasks").textContent = "Current Tasks: " + document.getElementById("mylist").getElementsByTagName("li").length;
+        document.getElementById("tasks").textContent = "Current Tasks: " + document.getElementsByTagName("li").length;
     }
     else {
         document.getElementById("tasks").textContent = "Current Tasks: None";
@@ -44,6 +44,12 @@ function clearitemlist() {
 
 //remove task
 function removetask() {
+    if ((document.getElementById("mylist").innerHTML.trim() == "") != false) {
+        alert("No tasks to remove!");
+        return;
+    }
+    alert("Now select the task you want to remove.");
+    var listss = document.getElementsByTagName("li");
     if (document.getElementById("cnclbtn") == null) {
         var cancelbutton = document.createElement("button");
     cancelbutton.innerHTML = "cancel";
@@ -51,7 +57,21 @@ function removetask() {
     cancelbutton.onclick = function(event) {
         var btn = document.getElementById("cnclbtn");
         btn.remove();
+        for (var k=0; k<listss.length; k++) {
+            listss[k].onclick = function(event) {}
+        }
     }
     document.body.appendChild(cancelbutton);
+    }
+    for (var k=0; k<listss.length; k++) {
+        listss[k].onclick = function(event) {
+            document.getElementById("cnclbtn").remove();
+            this.remove();
+            for (var k=0; k<listss.length; k++) {
+                listss[k].onclick = function(event) {}
+            }
+            alert("Selected task will now be removed.");
+            isEmpty();
+        }
     }
 }
