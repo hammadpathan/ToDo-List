@@ -1,4 +1,3 @@
-'use strict'
 
 //code for enter button if user is inside the input box
 const enterkey = document.getElementsByClassName("inputtext")[0];
@@ -20,7 +19,7 @@ function changelistitem() {
     node.appendChild(textnode);
     document.getElementById("mylist").appendChild(node);
     isEmpty();
-    document.getElementById("listadd").value = "enter task here";
+    document.getElementById("listadd").placeholder = "Type in a task";
     //get user cursor focus off textbox
     document.getElementById("listadd").blur();
 }
@@ -29,10 +28,10 @@ function changelistitem() {
 function isEmpty() {
     if ((document.getElementById("mylist").innerHTML.trim() == "") == false) {
         //number of tasks
-        document.getElementById("tasks").textContent = "Current Tasks: " + document.getElementsByTagName("li").length;
+        document.getElementById("tasks").textContent = "Number of Tasks: " + document.getElementsByTagName("li").length;
     }
     else {
-        document.getElementById("tasks").textContent = "Current Tasks: None";
+        document.getElementById("tasks").textContent = "Woohoo! All tasks completed.";
     }
 }
 
@@ -45,10 +44,10 @@ function clearitemlist() {
 //remove task
 function removetask() {
     if ((document.getElementById("mylist").innerHTML.trim() == "") != false) {
-        alert("No tasks to remove!");
+        
         return;
     }
-    alert("Now select the task you want to remove.");
+    document.getElementById("select").innerHTML = "Now select the task you want to remove.";
     var listss = document.getElementsByTagName("li");
     if (document.getElementById("cnclbtn") == null) {
         var cancelbutton = document.createElement("button");
@@ -70,7 +69,7 @@ function removetask() {
             for (var k=0; k<listss.length; k++) {
                 listss[k].onclick = function(event) {}
             }
-            alert("Selected task will now be removed.");
+            document.getElementById("select").innerHTML = "";
             isEmpty();
         }
     }
